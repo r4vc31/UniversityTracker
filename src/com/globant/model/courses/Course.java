@@ -86,10 +86,9 @@ public class Course {
     @Override
     public String toString() {
         return "Course" + " #" + id +
-                "\n\tName:               " + name +
-                "\n\tClassroom:          " + ((classroom==null)?"NA":classroom) +
-                "\n\tNumber of students: " + ((students==null)?0:students.size()) +
-                "\n\tTeacher:            " + ((teacher==null)?"NA":teacher);
+                "\n\tName            : " + name +
+                "\n\tClassroom       : " + ((classroom==null)?"NA":classroom) +
+                "\n\tNo. of Students : " + ((students==null)?0:students.size());
     }
 }
 

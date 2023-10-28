@@ -26,7 +26,7 @@ public abstract class Teacher {
     @Override
     public String toString() {
         return "Teacher" +
-                "\n\tName  : " + name +
-                "\n\tSalary: " + String.format("%.2f", salary);
+                "\n\tName   : " + name +
+                "\n\tSalary : " + ((salary <= 0)?"Not calculated":String.format("%.2f", salary));
     }
 }
