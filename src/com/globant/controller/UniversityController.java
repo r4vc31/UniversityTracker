@@ -33,28 +33,28 @@ public class UniversityController {
     }
 
     // methods to display teachers, students, and courses info
-    public void printTeachers() {
-        for (Teacher teacher : teachers) {
-            System.out.println(teacher);
+    //General
+    public static void printElements(Object[] objects ){
+        for (int i = 0; i < objects.length; i++) {
+            Object obj = objects[i];
+            System.out.println((i+1) + ". " + obj.toString());
         }
+    }
+    //Specific
+    public void printTeachers() {
+        printElements(teachers.toArray());
     }
 
     public void printStudents() {
-        for (Student student : students) {
-            System.out.println(student);
-        }
+        printElements(students.toArray());
     }
 
     public void printCourses() {
-        for (Course course : courses) {
-            String courseInfo = course.getName().toUpperCase() + " Course " + " - " +
-                    "Clasroom: " + course.getClassroom();
-            System.out.println(courseInfo);
-        }
+        printElements(courses.toArray());
     }
 
 
-    private void initializeData() {
+    public void initializeData() {
         // Initialize teachers, students, and classes
 
         // Add 2 full time teachers
@@ -67,7 +67,7 @@ public class UniversityController {
 
         // Add 6 students
         String[] studentsName = {"Juan", "Ronald", "José", "Antony", "Helen", "Katy"};
-        for (int i = 0; i <= 6; i++) {
+        for (int i = 0; i < 6; i++) {
             students.add(new Student(studentsName[i], 20 + i));
         }
 
