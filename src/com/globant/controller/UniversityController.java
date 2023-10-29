@@ -5,6 +5,8 @@ import com.globant.model.students.Student;
 import com.globant.model.teachers.FullTimeTeacher;
 import com.globant.model.teachers.PartTimeTeacher;
 import com.globant.model.teachers.Teacher;
+import com.globant.utils.PrintUtils;
+import com.globant.utils.UniversityManagementSystem;
 
 import java.util.*;
 
@@ -19,6 +21,14 @@ public class UniversityController {
         courses = new ArrayList<>();
     }
 
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
     // methods to add teachers, students, and courses
     public void addTeacher(Teacher teacher) {
         teachers.add(teacher);
@@ -28,29 +38,34 @@ public class UniversityController {
         students.add(student);
     }
 
-    public void addClass(Course course) {
+    public void addCourse(Course course) {
         courses.add(course);
     }
 
-    // methods to display teachers, students, and courses info
-    //General
-    public static void printElements(Object[] objects ){
-        for (int i = 0; i < objects.length; i++) {
-            Object obj = objects[i];
-            System.out.println((i+1) + ". " + obj.toString());
-        }
+    public void removeTeacher(Teacher teacher) {
+        teachers.remove(teacher);
     }
-    //Specific
+
+    public void removeStudent(Student student) {
+        students.remove(student);
+    }
+
+    public void removeCourse(Course course) {
+        courses.remove(course);
+    }
+
+
+    // methods to display teachers, students, and courses info
     public void printTeachers() {
-        printElements(teachers.toArray());
+        PrintUtils.printList(teachers);
     }
 
     public void printStudents() {
-        printElements(students.toArray());
+        PrintUtils.printList(students);
     }
 
     public void printCourses() {
-        printElements(courses.toArray());
+        PrintUtils.printList(courses);
     }
 
 
@@ -79,11 +94,82 @@ public class UniversityController {
             course.setTeacher(teachers.get(i - 1));
             Student randomStudent;
             Random rand = new Random();
-            for (int j = 0; j < 3; j++) {
+            int numberStudents = rand.nextInt(students.size());
+            while (course.getStudents().size() < numberStudents){
                 randomStudent = students.get(rand.nextInt(students.size()));
+                if ((course.getStudents().contains(randomStudent))){
+                    continue;
+                }
                 course.addStudent(randomStudent);
             }
             courses.add(course);
         }
     }
+
+    public Course createCourse(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the course name: ");
+        String name = scanner.nextLine();
+        Course course = new Course(name);
+
+        System.out.print("Enter the classroom: ");
+        String classroom = scanner.nextLine();
+        course.assignClassroom(classroom);
+
+        boolean addStudent = true;
+        String userInput;
+        while (addStudent){
+            System.out.print("Add a student? (y/n):");
+            userInput = scanner.nextLine();
+            if (userInput.equals("y")){
+                Student student = UniversityManagementSystem.getItemFromUser("Enter the student ID: ",
+                        this::searchStudentByID);
+                course.addStudent(student);
+            } else if (userInput.equals("n")) {
+                addStudent = false;
+            }else {
+                System.out.println("The input is not valid");
+            }
+        }
+        Teacher teacher = UniversityManagementSystem.getItemFromUser("Enter the teacher ID: ",
+                this::searchTeacherByID);
+        course.assignTeacher(teacher);
+        return course;
+    }
+
+    public Student createStudent(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the student's name: ");
+        String name = scanner.nextLine();
+        int age = -1;
+        while (age == -1){
+            System.out.print("Enter the student's age: ");
+            try {
+                age = Integer.parseInt(scanner.nextLine());
+                age = (age > 0)?age:-1;
+            }catch (NumberFormatException e){
+                System.out.println("Invalid Age");
+            }
+        }
+
+        return new Student(name, age);
+
+    }
+
+    //Search methods
+    public Student searchStudentByID(int id){
+        return UniversityManagementSystem.searchByID(id, students);
+    }
+
+    public Teacher searchTeacherByID(int id){
+        return UniversityManagementSystem.searchByID(id, teachers);
+    }
+
+    public Course searchCourseByID(int id){
+        return UniversityManagementSystem.searchByID(id, courses);
+    }
+
+
+
 }
