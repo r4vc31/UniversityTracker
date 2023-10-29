@@ -1,24 +1,21 @@
 package com.globant.model.courses;
 
+import com.globant.model.Identifiable;
 import com.globant.model.students.Student;
 import com.globant.model.teachers.Teacher;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Course {
-
-    private static int counter = 0;
-    private int id;
-    private String name;
+public class Course extends Identifiable {
     private String classroom;
     private List<Student> students;
     private Teacher teacher;
 
     public Course(String name) {
-        counter++;
-        this.id = counter;
+        super();
         this.name = name;
+        students = new ArrayList<>();
     }
 
     public Course(String name, String classroom, List<Student> students, Teacher teacher) {
@@ -26,22 +23,6 @@ public class Course {
         this.classroom = classroom;
         this.students = students;
         this.teacher = teacher;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getClassroom() {
@@ -73,10 +54,11 @@ public class Course {
     }
 
     public void addStudent(Student newStudent){
-        if (students == null) {
-            students = new ArrayList<>();
-        }
         students.add(newStudent);
+    }
+
+    public void removeStudent(Student newStudent){
+        students.remove(newStudent);
     }
 
     public void assignTeacher(Teacher newTeacher){
@@ -85,11 +67,10 @@ public class Course {
 
     @Override
     public String toString() {
-        return "Course" + " #" + id +
-                "\n\tName:               " + name +
-                "\n\tClassroom:          " + ((classroom==null)?"NA":classroom) +
-                "\n\tNumber of students: " + ((students==null)?0:students.size()) +
-                "\n\tTeacher:            " + ((teacher==null)?"NA":teacher);
+        return "Course " + "( " +  "id#" + id + " )" +
+                "\n\tName            : " + name +
+                "\n\tClassroom       : " + ((classroom==null)?"NA":classroom) +
+                "\n\tNo. of Students : " + ((students==null)?0:students.size());
     }
 }
 

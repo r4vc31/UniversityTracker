@@ -1,21 +1,27 @@
 package com.globant.model.students;
 
-public class Student {
-    private static int counter;
-    private int id;
-    private String name;
+import com.globant.model.Identifiable;
+
+public class Student extends Identifiable {
     private int age;
 
     public Student(String name, int age) {
-        counter++;
-        this.id = counter;
+        super();
         this.name = name;
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
         this.age = age;
     }
 
     @Override
     public String toString() {
-        return "Student" + " #" + id +
+        return "Student "  + "( " +  "id#" + id + " )" +
                 "\n\tName : " + name +
                 "\n\tAge  : " + age;
     }
