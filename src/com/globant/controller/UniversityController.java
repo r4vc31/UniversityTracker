@@ -85,6 +85,10 @@ public class UniversityController {
     }
 
 
+    /**
+     * Method to initialize information<br>
+     * Add 4 teachers, 6 students and 4 courses
+     */
     public void initializeData() {
         // Initialize teachers, students, and classes
 
@@ -123,6 +127,10 @@ public class UniversityController {
         }
     }
 
+    /**
+     * Course creation method
+     * @return an object of type Course created from the information entered by the user
+     */
     public Course createCourse(){
         Scanner scanner = new Scanner(System.in);
 
@@ -154,6 +162,10 @@ public class UniversityController {
         return new Course(name, classroom, studentsCourse, teacher);
     }
 
+    /**
+     * Student creation method
+     * @return an object of type Student created from the information entered by the user
+     */
     public Student createStudent(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the student's name: ");
@@ -174,14 +186,26 @@ public class UniversityController {
     }
 
     //Search methods
+    /**
+     * Student search method
+     * @return an object of type Student if the element exists in the student list
+     */
     public Student searchStudentByID(int id){
         return UniversityManagementSystem.searchByID(id, students);
     }
 
+    /**
+     * Teacher search method
+     * @return an object of type Teacher if the element exists in the teacher list
+     */
     public Teacher searchTeacherByID(int id){
         return UniversityManagementSystem.searchByID(id, teachers);
     }
 
+    /**
+     * Course search method
+     * @return an object of type Course if the element exists in the course list
+     */
     public Course searchCourseByID(int id){
         return UniversityManagementSystem.searchByID(id, courses);
     }

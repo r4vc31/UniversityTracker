@@ -18,6 +18,9 @@ public class FullTimeTeacher extends Teacher{
         this.experienceYears = experienceYears;
     }
 
+    /**
+     * @return Salary calculation from base salary and years of experience
+     */
     @Override
     public double calculateSalary() {
         this.setSalary(FullTimeTeacher.baseSalary * (1.10 * experienceYears));
