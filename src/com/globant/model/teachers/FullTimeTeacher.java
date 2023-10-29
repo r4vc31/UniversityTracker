@@ -1,6 +1,7 @@
 package com.globant.model.teachers;
 
 public class FullTimeTeacher extends Teacher{
+    private static final double baseSalary = 1500;
     private int experienceYears;
 
     public FullTimeTeacher(String name, int experienceYears) {
@@ -10,7 +11,7 @@ public class FullTimeTeacher extends Teacher{
 
     @Override
     public double calculateSalary() {
-        this.setSalary(getBaseSalary() * (1.10 * experienceYears));
+        this.setSalary(FullTimeTeacher.baseSalary * (1.10 * experienceYears));
         return this.getSalary();
     }
 

@@ -1,16 +1,19 @@
 package com.globant.model.teachers;
 
-public abstract class Teacher {
-    private String name;
-    private static final double baseSalary = 1020;
+import com.globant.model.ISalaryCalculator;
+import com.globant.model.Identificable;
+
+public abstract class Teacher extends Identificable implements ISalaryCalculator {
     private double salary;
 
     public Teacher(String name) {
+        Identificable.counter++;
+        this.id = Identificable.counter;
         this.name = name;
     }
 
-    public static double getBaseSalary() {
-        return baseSalary;
+    public int getId() {
+        return id;
     }
 
     public double getSalary() {
