@@ -8,7 +8,7 @@ public abstract class Teacher extends Identifiable implements ISalaryCalculator 
 
     public Teacher(String name) {
         super();
-        this.name = name;
+        this.setName(name);
     }
 
     public double getSalary() {
@@ -23,8 +23,8 @@ public abstract class Teacher extends Identifiable implements ISalaryCalculator 
 
     @Override
     public String toString() {
-        return "Teacher "  + "( " +  "id#" + id + " )" +
-                "\n\tName   : " + name +
+        return "Teacher "  + "( " +  "id#" + getId() + " )" +
+                "\n\tName   : " + getName() +
                 "\n\tSalary : " + ((salary <= 0)?"Not calculated":String.format("%.2f", salary));
     }
 }

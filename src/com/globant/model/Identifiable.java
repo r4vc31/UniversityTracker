@@ -1,9 +1,9 @@
 package com.globant.model;
 
 public abstract class Identifiable {
-    public static int counter = 0;
-    public final int id;
-    public String name;
+    private static int counter = 0;
+    private final int id;
+    private String name;
 
     protected Identifiable() {
         counter++;

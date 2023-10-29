@@ -6,6 +6,7 @@ public class PartTimeTeacher extends Teacher{
     public PartTimeTeacher(String name, int activeHoursPerWeek) {
         super(name);
         this.activeHoursPerWeek = activeHoursPerWeek;
+        this.setSalary(calculateSalary());
     }
 
     public int getActiveHoursPerWeek() {

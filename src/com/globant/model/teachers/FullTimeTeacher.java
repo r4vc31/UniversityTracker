@@ -7,6 +7,15 @@ public class FullTimeTeacher extends Teacher{
     public FullTimeTeacher(String name, int experienceYears) {
         super(name);
         this.experienceYears = experienceYears;
+        this.setSalary(calculateSalary());
+    }
+
+    public int getExperienceYears() {
+        return experienceYears;
+    }
+
+    public void setExperienceYears(int experienceYears) {
+        this.experienceYears = experienceYears;
     }
 
     @Override

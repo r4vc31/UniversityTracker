@@ -7,7 +7,7 @@ public class Student extends Identifiable {
 
     public Student(String name, int age) {
         super();
-        this.name = name;
+        this.setName(name);
         this.age = age;
     }
 
@@ -21,8 +21,8 @@ public class Student extends Identifiable {
 
     @Override
     public String toString() {
-        return "Student "  + "( " +  "id#" + id + " )" +
-                "\n\tName : " + name +
+        return "Student "  + "( " +  "id#" + getId() + " )" +
+                "\n\tName : " + getName() +
                 "\n\tAge  : " + age;
     }
 }

@@ -21,12 +21,28 @@ public class UniversityController {
         courses = new ArrayList<>();
     }
 
+    public List<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(List<Teacher> teachers) {
+        this.teachers = teachers;
+    }
+
     public List<Student> getStudents() {
         return students;
     }
 
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
     public List<Course> getCourses() {
         return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 
     // methods to add teachers, students, and courses
@@ -88,21 +104,22 @@ public class UniversityController {
 
         // Add 4 courses
         String[] coursesName = {"OS Design", "DB Systems", "AI Basics", "ML Intro"};
+        Random rand = new Random();
         for (int i = 1; i <= 4; i++) {
-            Course course = new Course(coursesName[i-1]);
-            course.assignClassroom("Room_" + (100+i));
-            course.setTeacher(teachers.get(i - 1));
+            String name = coursesName[i-1];
+            String classroom = "Room_" + (100+i);
             Student randomStudent;
-            Random rand = new Random();
             int numberStudents = rand.nextInt(students.size());
-            while (course.getStudents().size() < numberStudents){
+            List<Student> studentsCourse = new ArrayList<>();
+            while (studentsCourse.size() < numberStudents){
                 randomStudent = students.get(rand.nextInt(students.size()));
-                if ((course.getStudents().contains(randomStudent))){
+                if ((studentsCourse.contains(randomStudent))){
                     continue;
                 }
-                course.addStudent(randomStudent);
+                studentsCourse.add(randomStudent);
             }
-            courses.add(course);
+            Teacher teacher = teachers.get(rand.nextInt(teachers.size()));
+            courses.add(new Course(name, classroom, studentsCourse, teacher));
         }
     }
 
@@ -111,21 +128,20 @@ public class UniversityController {
 
         System.out.print("Enter the course name: ");
         String name = scanner.nextLine();
-        Course course = new Course(name);
 
         System.out.print("Enter the classroom: ");
         String classroom = scanner.nextLine();
-        course.assignClassroom(classroom);
 
         boolean addStudent = true;
         String userInput;
+        List<Student> studentsCourse = new ArrayList<>();
         while (addStudent){
-            System.out.print("Add a student? (y/n):");
+            System.out.print("Add a student? (y/n): ");
             userInput = scanner.nextLine();
             if (userInput.equals("y")){
                 Student student = UniversityManagementSystem.getItemFromUser("Enter the student ID: ",
                         this::searchStudentByID);
-                course.addStudent(student);
+                studentsCourse.add(student);
             } else if (userInput.equals("n")) {
                 addStudent = false;
             }else {
@@ -134,8 +150,8 @@ public class UniversityController {
         }
         Teacher teacher = UniversityManagementSystem.getItemFromUser("Enter the teacher ID: ",
                 this::searchTeacherByID);
-        course.assignTeacher(teacher);
-        return course;
+
+        return new Course(name, classroom, studentsCourse, teacher);
     }
 
     public Student createStudent(){

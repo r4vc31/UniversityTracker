@@ -12,14 +12,9 @@ public class Course extends Identifiable {
     private List<Student> students;
     private Teacher teacher;
 
-    public Course(String name) {
-        super();
-        this.name = name;
-        students = new ArrayList<>();
-    }
-
     public Course(String name, String classroom, List<Student> students, Teacher teacher) {
-        this(name);
+        super();
+        this.setName(name);
         this.classroom = classroom;
         this.students = students;
         this.teacher = teacher;
@@ -49,10 +44,6 @@ public class Course extends Identifiable {
         this.teacher = teacher;
     }
 
-    public void assignClassroom(String classroom){
-        this.classroom = classroom;
-    }
-
     public void addStudent(Student newStudent){
         students.add(newStudent);
     }
@@ -61,14 +52,10 @@ public class Course extends Identifiable {
         students.remove(newStudent);
     }
 
-    public void assignTeacher(Teacher newTeacher){
-        this.teacher = newTeacher;
-    }
-
     @Override
     public String toString() {
-        return "Course " + "( " +  "id#" + id + " )" +
-                "\n\tName            : " + name +
+        return "Course " + "( " +  "id#" + getId() + " )" +
+                "\n\tName            : " + getName() +
                 "\n\tClassroom       : " + ((classroom==null)?"NA":classroom) +
                 "\n\tNo. of Students : " + ((students==null)?0:students.size());
     }
