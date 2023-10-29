@@ -54,10 +54,11 @@ public class Course extends Identifiable {
     }
 
     public void addStudent(Student newStudent){
-        if (students == null) {
-            students = new ArrayList<>();
-        }
         students.add(newStudent);
+    }
+
+    public void removeStudent(Student newStudent){
+        students.remove(newStudent);
     }
 
     public void assignTeacher(Teacher newTeacher){
