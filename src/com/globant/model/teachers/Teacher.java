@@ -1,19 +1,14 @@
 package com.globant.model.teachers;
 
 import com.globant.model.ISalaryCalculator;
-import com.globant.model.Identificable;
+import com.globant.model.Identifiable;
 
-public abstract class Teacher extends Identificable implements ISalaryCalculator {
+public abstract class Teacher extends Identifiable implements ISalaryCalculator {
     private double salary;
 
     public Teacher(String name) {
-        Identificable.counter++;
-        this.id = Identificable.counter;
+        super();
         this.name = name;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public double getSalary() {
@@ -28,7 +23,7 @@ public abstract class Teacher extends Identificable implements ISalaryCalculator
 
     @Override
     public String toString() {
-        return "Teacher" +
+        return "Teacher "  + "( " +  "id#" + id + " )" +
                 "\n\tName   : " + name +
                 "\n\tSalary : " + ((salary <= 0)?"Not calculated":String.format("%.2f", salary));
     }
